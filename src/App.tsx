@@ -4,17 +4,36 @@ import {
 } from 'react-router-dom'
 import { lazy } from 'react'
 import SuspenseElement from './components/SuspenseElement'
-const LandingPage = lazy(() => import('@/pages/Index'))
+
+const Home = lazy(() => import('@/pages/Index'))
+const AboutUs = lazy(() => import('@/pages/aboutus/Index'))
+const Services = lazy(() => import('@/pages/services/Index'))
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <SuspenseElement>
-        <LandingPage />
+        <Home />
       </SuspenseElement>
     )
-  }
+  },
+  {
+    path: '/tentang-kami',
+    element: (
+      <SuspenseElement>
+        <AboutUs />
+      </SuspenseElement>
+    )
+  },
+  {
+    path: '/layanan',
+    element: (
+      <SuspenseElement>
+        <Services />
+      </SuspenseElement>
+    )
+  },
 ])
 
 const App = () => {

@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'lexendRegular';
+  src: url('fonts/Lexend-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'lexendMedium';
+  src: url('fonts/Lexend-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'lexendSemiBold';
+  src: url('fonts/Lexend-SemiBold.ttf');
+}
+
+.scroll-client::-webkit-scrollbar {
+  display: none;
+}
+
+.slick-arrow.slick-prev {
+  left: 5%;
+  z-index: 1;
+}
+
+.slick-arrow.slick-next {
+  right: 5%;
+  z-index: 1;
+}
