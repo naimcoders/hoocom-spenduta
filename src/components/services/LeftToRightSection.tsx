@@ -9,7 +9,7 @@ const LeftToRightSection = (
   { title, paragraph, srcImage, altImage }: SectionProps
 ) => {
   return (
-    <section className='p-5 grid grid-cols-auto-fit gap-4 600px:px-40 600px:mb-16 mb-10'>
+    <section className='p-5 grid grid-cols-auto-fit gap-16 600px:px-40 600px:mb-16 mb-10'>
       <aside className='text-justify'>
         <h2 className="font-lexendSemiBold text-18px mb-2">{ title }</h2>
         <p>{ paragraph }</p>
@@ -17,7 +17,7 @@ const LeftToRightSection = (
       <img
         src={ srcImage }
         alt={ altImage }
-        className='rounded-2xl 600px:h-56 m-auto shadow-md'
+        className='rounded-2xl 600px:h-56 m-auto w-full object-cover shadow-md'
       />
     </section>
   )

@@ -15,7 +15,7 @@ export const footerLinks: FooterLinkProps[] = [
     links: [
       { id: 1, title: 'Instagram', to: 'https://instagram.com/dudigrocee_undipamks?igshid=OGQ5ZDc2ODk2ZA==' },
       { id: 2, title: 'Facebook', to: '#' },
-      { id: 3, title: 'Linked in', to: '#' },
+      { id: 3, title: 'LinkedIn', to: '#' },
     ]
   },
   {
@@ -27,7 +27,7 @@ export const footerLinks: FooterLinkProps[] = [
   },
   {
     id: 3,
-    title: 'Hubungi kami',
+    title: 'Kontak',
     links: [
       { id: 1, title: 'Hubungi kami', to: '/hubungi-kami' }
     ]

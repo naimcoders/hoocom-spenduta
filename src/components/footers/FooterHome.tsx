@@ -7,7 +7,7 @@ const FooterHome = () => {
       <div className="flex flex-col gap-6 600px:flex-row 600px:gap-14">
         {footerLinks.map(link => (
           <div className="flex flex-col gap-5" key={link.id}>
-            <h2 className="capitalize text-dark text-18px font-lexendSemiBold">
+            <h2 className="capitalize text-[#BCBEC0] text-18px font-lexendSemiBold">
               { link.title }
             </h2>
             <nav className="flex flex-col gap-1">
