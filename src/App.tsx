@@ -8,6 +8,7 @@ import SuspenseElement from './components/SuspenseElement'
 const Home = lazy(() => import('@/pages/Index'))
 const AboutUs = lazy(() => import('@/pages/aboutus/Index'))
 const Services = lazy(() => import('@/pages/services/Index'))
+const ContactUs = lazy(() => import('@/pages/contactus/Index'))
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
     element: (
       <SuspenseElement>
         <Services />
+      </SuspenseElement>
+    )
+  },
+  {
+    path: '/hubungi-kami',
+    element: (
+      <SuspenseElement>
+        <ContactUs />
       </SuspenseElement>
     )
   },

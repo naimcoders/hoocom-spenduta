@@ -32,6 +32,6 @@ export const dataLinks: ArrayLinkProps[] = [
     id: 4,
     to: '/hubungi-kami',
     indonesianTitle: 'Hubungi kami',
-    englishTitle: 'contacts'
+    englishTitle: 'contactus'
   }
 ]
