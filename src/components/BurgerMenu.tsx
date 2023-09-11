@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import { Link } from "react-router-dom"
-import { dataLinks } from "@/constants/header-link-props"
+import { dataLinks } from "@/utils/header-link-props"
 
 type BurgerMenuProps = {
   openBurgerMenu: boolean

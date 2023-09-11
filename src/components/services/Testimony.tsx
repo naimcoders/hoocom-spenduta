@@ -1,4 +1,4 @@
-import { testimonyDatas } from "@/constants/testimony-props"
+import { testimonyDatas } from "@/utils/testimony-props"
 
 const Testimony = () => {
   return (

@@ -1,9 +1,9 @@
 import {
   HeaderProps,
   dataLinks
-} from '@/constants/header-link-props'
+} from '@/utils/header-link-props'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import BurgerMenu from "@/components/BurgerMenu"
 import hoocomLogo from '@/assets/hoocomLogo.webp'
 
@@ -14,11 +14,14 @@ const HeaderHome = ({ pageName }: HeaderProps) => {
     setBurgerActive(!burgerActive)
   }
 
+  const navigate = useNavigate()
+  const navigateToHomepage = () => navigate('/')
+
   return (
-    <header className='flex items-center justify-between p-5 600px:px-40 bg-white m-auto'>
-      <div className='flex items-center gap-4 text-20px'>
+    <header className='flex items-center justify-between p-5 bg-white 851px:px-48 m-auto'>
+      <div className='flex items-center gap-4 text-20px cursor-pointer' title='Kembali ke beranda' onClick={navigateToHomepage}>
         <img src={hoocomLogo} alt="Hoocom logo" className='w-3rem' />
-        <h1 className='uppercase font-lexendSemiBold text-secondary cursor-default'>hoocom</h1>
+        <h1 className='uppercase font-lexendSemiBold text-secondary'>hoocom</h1>
       </div>
       
       <nav className='flex gap-8 850px:hidden'>

@@ -1,8 +1,6 @@
 import '@/styles/index.css'
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
 import Slider from 'react-slick'
-import { dataBanners } from '@/constants/Banner-props'
+import { dataBanners } from '@/utils/banner-props'
 
 const Banner = () => {
   const setSlider = {
@@ -10,14 +8,16 @@ const Banner = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000
   }
 
   return (
     <section>
       <Slider {...setSlider}>
         {dataBanners.map(banner => (
-          <img src={ banner.src } alt="banner" className='aspect-square 600px:h-banner 600px:w-banner object-cover' key={ banner.id } />
+          <img src={ banner.src } alt="banner" className='aspect-square 600px:h-banner object-cover' key={ banner.id } />
         ))}
       </Slider>
     </section>

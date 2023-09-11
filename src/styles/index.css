@@ -17,10 +17,6 @@
   src: url('fonts/Lexend-SemiBold.ttf');
 }
 
-.scroll-client::-webkit-scrollbar {
-  display: none;
-}
-
 .slick-arrow.slick-prev {
   left: 5%;
   z-index: 1;
@@ -29,4 +25,8 @@
 .slick-arrow.slick-next {
   right: 5%;
   z-index: 1;
+}
+
+.select-account {
+  -webkit-tap-highlight-color: transparent;
 }

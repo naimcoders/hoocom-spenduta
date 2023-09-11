@@ -2,7 +2,7 @@ import bannerTest from '@/assets/bannerTest.webp'
 
 const News = () => {
   return (
-    <section className="News 600px:px-40 flex flex-col gap-6 601px:px-4">
+    <section className="News flex flex-col gap-6 px-5 851px:px-48">
       <img
         src={bannerTest}
         alt="news image"

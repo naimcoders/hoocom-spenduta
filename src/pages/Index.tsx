@@ -6,7 +6,7 @@ import HeaderHome from "@/components/headers/HeaderHome"
 
 const Home = () => {
   return (
-    <main className="Home-page">
+    <main>
       <HeaderHome pageName="home" />
       <Banner />
       <Clients />

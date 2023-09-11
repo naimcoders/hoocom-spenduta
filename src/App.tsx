@@ -8,7 +8,11 @@ import SuspenseElement from './components/SuspenseElement'
 const Home = lazy(() => import('@/pages/Index'))
 const AboutUs = lazy(() => import('@/pages/aboutus/Index'))
 const Services = lazy(() => import('@/pages/services/Index'))
+<<<<<<< Updated upstream
 const ContactUs = lazy(() => import('@/pages/contactus/Index'))
+=======
+const LoginPage = lazy(() => import('@/pages/login/Index'))
+>>>>>>> Stashed changes
 
 const router = createBrowserRouter([
   {
@@ -36,10 +40,17 @@ const router = createBrowserRouter([
     )
   },
   {
+<<<<<<< Updated upstream
     path: '/hubungi-kami',
     element: (
       <SuspenseElement>
         <ContactUs />
+=======
+    path: '/masuk',
+    element: (
+      <SuspenseElement>
+        <LoginPage />
+>>>>>>> Stashed changes
       </SuspenseElement>
     )
   },
