@@ -32,4 +32,12 @@ export const footerLinks: FooterLinkProps[] = [
       { id: 1, title: 'Hubungi kami', to: '/hubungi-kami' }
     ]
   },
+  {
+    id: 4,
+    title: 'Legal',
+    links: [
+      { id: 1, title: 'Syarat dan Ketentuan', to: '/syarat-dan-ketentuan' },
+      { id: 2, title: 'Kebijakan Privasi', to:'/kebijakan-privasi' }
+    ]
+  },
 ]

@@ -8,11 +8,10 @@ import SuspenseElement from './components/SuspenseElement'
 const Home = lazy(() => import('@/pages/Index'))
 const AboutUs = lazy(() => import('@/pages/aboutus/Index'))
 const Services = lazy(() => import('@/pages/services/Index'))
-<<<<<<< Updated upstream
 const ContactUs = lazy(() => import('@/pages/contactus/Index'))
-=======
 const LoginPage = lazy(() => import('@/pages/login/Index'))
->>>>>>> Stashed changes
+const TermsnConditions = lazy(() => import('@/pages/termsnconditions/index'))
+const PrivacyPolicy = lazy(() => import('@/pages/privacypolicy/index'))
 
 const router = createBrowserRouter([
   {
@@ -40,17 +39,34 @@ const router = createBrowserRouter([
     )
   },
   {
-<<<<<<< Updated upstream
     path: '/hubungi-kami',
     element: (
       <SuspenseElement>
         <ContactUs />
-=======
+      </SuspenseElement>
+    )
+  },
+  {
     path: '/masuk',
     element: (
       <SuspenseElement>
         <LoginPage />
->>>>>>> Stashed changes
+      </SuspenseElement>
+    )
+  },
+  {
+    path: '/syarat-dan-ketentuan',
+    element: (
+      <SuspenseElement>
+        <TermsnConditions />
+      </SuspenseElement>
+    )
+  },
+  {
+    path: '/kebijakan-privasi',
+    element: (
+      <SuspenseElement>
+        <PrivacyPolicy />
       </SuspenseElement>
     )
   },
