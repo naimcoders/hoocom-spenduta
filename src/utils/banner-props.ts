@@ -1,5 +1,5 @@
-import bannerTest from '@/assets/bannerTest.webp'
-import bannerTest2 from '@/assets/bannerTest2.webp'
+import bnnr1 from '@/assets/banner1.webp';
+import bnnr2 from '@/assets/banner2.webp';
 
 interface BannerProps {
   id: number
@@ -7,6 +7,6 @@ interface BannerProps {
 }
 
 export const dataBanners: BannerProps[] = [
-  { id: 1, src: bannerTest },
-  { id: 2, src: bannerTest2 }
+  { id: 1, src: bnnr1 },
+  { id: 2, src: bnnr2 }
 ]

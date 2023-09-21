@@ -1,4 +1,4 @@
-import whyHoocomImg from '@/assets/whyHoocom.webp'
+import why from '@/assets/whysih.webp';
 import FooterHome from '@/components/footers/FooterHome'
 import HeaderHome from "@/components/headers/HeaderHome"
 
@@ -32,8 +32,8 @@ const AboutUs = () => {
           </p>
         </div>
         <img
-          src={whyHoocomImg}
-          alt="campus"
+          src={why}
+          alt="parents"
           className='w-full h-60 shadow-md 601px:h-full object-cover rounded-2xl'
         />
       </section>

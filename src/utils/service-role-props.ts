@@ -1,4 +1,7 @@
-import img1 from '@/assets/whyHoocom.webp'
+import guruMapelImg from '@/assets/mapelImg.webp'
+import operatorImg from '@/assets/operatorImg.webp';
+import ortuImg from '@/assets/ortuImg.webp';
+import walkesImg from '@/assets/walkesImg.webp';
 
 interface ServiceUserRoleProps {
   id: number
@@ -14,7 +17,7 @@ export const dataRoles: ServiceUserRoleProps[] = [
   {
     id: 1,
     title: 'orang tua',
-    srcImg: img1,
+    srcImg: ortuImg,
     listFeatures: [
       { id: 1, features: 'Melihat nilai tugas' },
       { id: 2, features: 'Melihat nilai ulangan' },
@@ -26,7 +29,7 @@ export const dataRoles: ServiceUserRoleProps[] = [
   {
     id: 2,
     title: 'wali kelas',
-    srcImg: img1,
+    srcImg: walkesImg,
     listFeatures: [
       { id: 1, features: 'Menginput data murid' },
       { id: 2, features: 'Menginput data orang tua murid' },
@@ -36,7 +39,7 @@ export const dataRoles: ServiceUserRoleProps[] = [
   {
     id: 3,
     title: 'guru mata pelajaran',
-    srcImg: img1,
+    srcImg: guruMapelImg,
     listFeatures: [
       { id: 1, features: 'Menginput nilai tugas mata pelajaran' },
       { id: 2, features: 'Menginput nilai ulangan harian' },
@@ -47,7 +50,7 @@ export const dataRoles: ServiceUserRoleProps[] = [
   {
     id: 4,
     title: 'operator',
-    srcImg: img1,
+    srcImg: operatorImg,
     listFeatures: [
       { id: 1, features: 'Mengatur periode tahun pelajaran' },
       { id: 2, features: 'Menginput data guru dan pegawai' }
