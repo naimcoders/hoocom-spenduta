@@ -18,9 +18,9 @@ const FormContact = () => {
 			<div className="flex flex-col gap-2">
 				<label htmlFor="fullname" className="capitalize">nama lengkap</label>
 				<TextfieldMultipleType
-					registerProp={register}
+					registerProps={register}
 					htmlForPropEnglish="fullname"
-					htmlForPropIndonesia="nama lengkap"
+					inIndonesia="nama lengkap"
 					placeholderProp="Masukkan nama lengkap"
 					type="text"
 				/>
@@ -28,9 +28,9 @@ const FormContact = () => {
 			<div className="flex flex-col gap-2">
 				<label htmlFor="email" className="capitalize">email</label>
 				<TextfieldMultipleType
-					registerProp={register}
+					registerProps={register}
 					htmlForPropEnglish="email"
-					htmlForPropIndonesia="email"
+					inIndonesia="email"
 					placeholderProp="Masukkan email"
 					type="email"
 				/>
