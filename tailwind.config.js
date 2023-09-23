@@ -32,6 +32,9 @@ export default {
       backgroundColor: {
         'dark-modal': 'rgba(31, 31, 41, .7)'
       },
+      boxShadow: {
+        'cardShadow': '0 4px 10px rgba(222, 212, 212, 0.25)'
+      },
       fontSize: {
         '12px': '.75rem',
         '15px': '.9375rem',

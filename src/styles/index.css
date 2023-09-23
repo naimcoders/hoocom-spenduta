@@ -27,6 +27,14 @@
   z-index: 1;
 }
 
-.select-account {
+.select-account,
+.general-data-edit,
+.header-role-profile,
+.hide-password,
+.none-highlight {
   -webkit-tap-highlight-color: transparent;
+}
+
+.card-scroll-horizontal::-webkit-scrollbar {
+  display: none;
 }

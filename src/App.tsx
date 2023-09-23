@@ -10,8 +10,7 @@ const AboutUs = lazy(() => import('@/pages/aboutus/Index'))
 const Services = lazy(() => import('@/pages/services/Index'))
 const ContactUs = lazy(() => import('@/pages/contactus/Index'))
 const LoginPage = lazy(() => import('@/pages/login/Index'))
-const TermsnConditions = lazy(() => import('@/pages/termsnconditions/index'))
-const PrivacyPolicy = lazy(() => import('@/pages/privacypolicy/index'))
+>>>>>>> Stashed changes
 
 const router = createBrowserRouter([
   {
@@ -51,22 +50,7 @@ const router = createBrowserRouter([
     element: (
       <SuspenseElement>
         <LoginPage />
-      </SuspenseElement>
-    )
-  },
-  {
-    path: '/syarat-dan-ketentuan',
-    element: (
-      <SuspenseElement>
-        <TermsnConditions />
-      </SuspenseElement>
-    )
-  },
-  {
-    path: '/kebijakan-privasi',
-    element: (
-      <SuspenseElement>
-        <PrivacyPolicy />
+>>>>>>> Stashed changes
       </SuspenseElement>
     )
   },

@@ -18,14 +18,14 @@ const SelectAccount = () => {
     setWkWrapper(!wkWrapper)
     setAdminWrapper(false)
     setGmWrapper(false)
-    setAccountType(!wkWrapper ? 'wali kelas' : '')
+    setAccountType(!wkWrapper ? 'wali-kelas' : '')
   }
   
   const handleGmWrapper = () => {
     setGmWrapper(!gmWrapper)
     setAdminWrapper(false)
     setWkWrapper(false)
-    setAccountType(!gmWrapper ? 'guru mapel' : '')
+    setAccountType(!gmWrapper ? 'guru-mapel' : '')
   }
 
   return (

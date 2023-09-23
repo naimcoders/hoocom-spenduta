@@ -1,32 +1,21 @@
-interface InitialValueProps {
-  defaultValues: {
-    fullname: string
-    password: string
-  }
+// ========== login ==========
+export type FormValuesLogin = {
+  fullname: string
+  password: string
 }
 
-export const setDefaultValues: InitialValueProps = {
-  defaultValues: { fullname: '', password: '' }
+// ========== contact us ==========
+export type FormValuesContactUs = {
+  fullname: '',
+  email: '',
+  message: ''
 }
 
-interface TextFieldProps {
-  id: number
-  label: string
-  htmlFor: string
-  placeholder: string
+// ========== edit generat data ==========
+export type FormValuesGeneralData = {
+  period: string
+  semester: string
+  kkm: number
+  email: string
+  password: string
 }
-
-export const textFieldLogin: TextFieldProps[] = [
-  {
-    id: 1,
-    label: 'nama lengkap',
-    htmlFor: 'fullname',
-    placeholder: 'Masukkan nama lengkap'
-  },
-  {
-    id: 2,
-    label: 'kata sandi',
-    htmlFor: 'password',
-    placeholder: 'Masukkan kata sandi'
-  }
-]

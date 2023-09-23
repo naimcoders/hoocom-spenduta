@@ -1,14 +1,15 @@
-import { setDefaultValues, textFieldLogin } from "@/utils/form-props"
 import { useForm } from "react-hook-form"
 import SelectAccount from "../SelectAccount"
 import { onSubmitLogin } from "@/onsubmit/on-submit-login"
+import SecondaryButton from "../buttons/SecondaryButton"
+import TextfieldPassword from "../textfields/TextfieldPassword"
+import { FormValuesLogin } from "@/utils/form-props"
+import TextfieldMultipleType from "../textfields/TextfieldMultipleType"
 
 const FormLogin = () => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm(setDefaultValues)
+    register, handleSubmit, formState: { errors }
+  } = useForm<FormValuesLogin>()
 
   const { onSubmit } = onSubmitLogin()
 
@@ -17,33 +18,31 @@ const FormLogin = () => {
       className="form flex flex-col gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {textFieldLogin.map(textfield => (
-        <div className='flex flex-col gap-4' key={textfield.id}>
-          <label
-            htmlFor={textfield.htmlFor}
-            className='capitalize'
-          >{textfield.label}</label>
-          <input
-            type={textfield.htmlFor !== 'password' ? 'text' : 'password'}
-            id={textfield.htmlFor}
-            placeholder={textfield.placeholder}
-            className='bg-transparent border-[1px] border-gray-highlight rounded-lg px-4 py-2 placeholder:text-gray-highlight focus:outline-1 focus:outline-secondary'
-            {...register(
-              textfield.htmlFor === 'fullname' ? 'fullname' : 'password', {
-                required: {
-                  value: true, message: `Masukkan ${textfield.label}`
-                }
-              }
-            )}
-          />
-          <p className='text-red-500 -mt-2 text-15px'>
-            {errors[textfield.htmlFor === 'fullname' ? 'fullname' : 'password']?.message}
-          </p>
-        </div>
-      ))}
+      <section className="flex flex-col gap-4">
+        <label htmlFor="fullname" className="capitalize">nama lengkap</label>
+        <TextfieldMultipleType
+          registerProps={register}
+          placeholderProp="Masukkan nama lengkap"
+          htmlForPropEnglish="fullname"
+          inIndonesia="nama lengkap"
+          type="text"
+        />
+        {errors.fullname ? <p className="text-red-500">{errors.fullname.message}</p> : null}
+      </section>
+      
+      <section className="flex flex-col gap-4">
+        <label htmlFor="password" className="capitalize">kata sandi</label>
+        <TextfieldPassword
+          registerProp={register}
+          placeholderProp="Masukkan kata sandi"
+          htmlForPropEnglish="password"
+          htmlForPropIndonesia="kata sandi"
+        />
+        {errors.password ? <p className="text-red-500">{errors.password.message}</p> : null}
+      </section>
 
       <SelectAccount />
-      <button className='capitalize bg-secondary text-primary p-3 rounded-lg mt-4 hover:bg-blue-600'>masuk</button>
+      <SecondaryButton label="masuk" />
     </form>
   )
 }
