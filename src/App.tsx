@@ -10,7 +10,6 @@ const AboutUs = lazy(() => import('@/pages/aboutus/Index'))
 const Services = lazy(() => import('@/pages/services/Index'))
 const ContactUs = lazy(() => import('@/pages/contactus/Index'))
 const LoginPage = lazy(() => import('@/pages/login/Index'))
->>>>>>> Stashed changes
 
 const router = createBrowserRouter([
   {
@@ -50,7 +49,6 @@ const router = createBrowserRouter([
     element: (
       <SuspenseElement>
         <LoginPage />
->>>>>>> Stashed changes
       </SuspenseElement>
     )
   },
