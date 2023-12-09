@@ -1,17 +1,18 @@
-import { useForm } from "react-hook-form"
-import SelectAccount from "../SelectAccount"
-import { onSubmitLogin } from "@/onsubmit/on-submit-login"
-import SecondaryButton from "../buttons/SecondaryButton"
-import TextfieldPassword from "../textfields/TextfieldPassword"
-import { FormValuesLogin } from "@/utils/form-props"
-import TextfieldMultipleType from "../textfields/TextfieldMultipleType"
+import { useForm } from "react-hook-form";
+import { FormValues } from "@/utils/form-props";
+import SelectAccount from "../SelectAccount";
+import SecondaryButton from "../buttons/SecondaryButton";
+import TextfieldMultipleType from "../textfields/TextfieldMultipleType";
+import SubmitLogin from "@/onsubmit/admin/submitLogin";
 
 const FormLogin = () => {
   const {
-    register, handleSubmit, formState: { errors }
-  } = useForm<FormValuesLogin>()
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>();
 
-  const { onSubmit } = onSubmitLogin()
+  const { onSubmit } = SubmitLogin();
 
   return (
     <form
@@ -19,32 +20,55 @@ const FormLogin = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <section className="flex flex-col gap-4">
-        <label htmlFor="fullname" className="capitalize">nama lengkap</label>
+        <label htmlFor="fullname" className="capitalize">
+          nama lengkap
+        </label>
         <TextfieldMultipleType
-          registerProps={register}
-          placeholderProp="Masukkan nama lengkap"
-          htmlForPropEnglish="fullname"
-          inIndonesia="nama lengkap"
+          name="fullname"
+          control={control}
+          rules={{
+            required: {
+              value: true,
+              message: "Masukkan nama lengkap",
+            },
+          }}
+          defaultValue=""
           type="text"
+          id="fullname"
+          placeholder="masukkan nama lengkap"
         />
-        {errors.fullname ? <p className="text-red-500">{errors.fullname.message}</p> : null}
+        {errors.fullname ? (
+          <p className="text-red-500 -mt-2">{errors.fullname.message}</p>
+        ) : null}
       </section>
-      
+
       <section className="flex flex-col gap-4">
-        <label htmlFor="password" className="capitalize">kata sandi</label>
-        <TextfieldPassword
-          registerProp={register}
-          placeholderProp="Masukkan kata sandi"
-          htmlForPropEnglish="password"
-          htmlForPropIndonesia="kata sandi"
+        <label htmlFor="password" className="capitalize">
+          kata sandi
+        </label>
+        <TextfieldMultipleType
+          name="password"
+          control={control}
+          rules={{
+            required: {
+              value: true,
+              message: "Masukkan kata sandi",
+            },
+          }}
+          defaultValue=""
+          type="password"
+          id="password"
+          placeholder="masukkan kata sandi"
         />
-        {errors.password ? <p className="text-red-500">{errors.password.message}</p> : null}
+        {errors.password ? (
+          <p className="text-red-500 -mt-2">{errors.password.message}</p>
+        ) : null}
       </section>
 
       <SelectAccount />
       <SecondaryButton label="masuk" />
     </form>
-  )
-}
+  );
+};
 
-export default FormLogin
+export default FormLogin;

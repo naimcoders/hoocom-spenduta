@@ -1,38 +1,50 @@
-import profileDefault from '@/assets/profileDefault.webp'
-import { useGetUserByIdStore } from '@/store/getUserByIdStore'
-import { timeGreeting } from '@/utils/time-greeting'
-import { useEffect } from 'react'
+import { useProfileHook } from "@/custom-hook/useProfile";
+import { timeGreeting } from "@/utils/time-greeting";
+import { useAuth } from "@/store/userStore";
+import ImageProfile from "../ImageProfile";
+import Loading from "../Loading";
 
-const HeaderRole = () => {
-  const greeting = timeGreeting()
-  const uri = import.meta.env.VITE_URI_BACKEND
-
-  const userId: string | null = window.localStorage.getItem('userId')
-  const foundUser = useGetUserByIdStore(state => state.userById)
-  const fetchUser = useGetUserByIdStore(state => state.fetch)
-
-  useEffect(() => {
-    fetchUser(`${uri}/api/general/getuser/${userId}`)
-  }, [])
+const TitleComponent = () => {
+  const greeting = timeGreeting();
+  const user = useAuth((v) => v.user);
 
   return (
-    <header className="px-5 py-6 flex items-center justify-between bg-white shadow-cardShadow 851px:px-56">
-      <div>
-        <h1 className="capitalize font-lexendMedium text-16px text-gray-highlight">
-          selamat { greeting }
-        </h1>
-        <h2 className="font-lexendSemiBold text-20px capitalize">
-          { foundUser.fullname }
-        </h2>
-      </div>
-      <img
-        src={profileDefault}
-        alt="profile"
-        className='header-role-profile w-8 cursor-pointer'
-        title='profil'
-      />
-    </header>
-  )
-}
+    <section>
+      <h1 className="capitalize font-lexendMedium text-15px text-dark">
+        selamat {greeting}
+      </h1>
+      <h2 className="font-lexendSemiBold text-20px capitalize">
+        {user?.fullname}
+      </h2>
+    </section>
+  );
+};
 
-export default HeaderRole
+const ProfileImageComponent = () => {
+  const { navigateToProfile, setImageSrc, getProfile } = useProfileHook();
+  if (getProfile.isLoading) return <Loading />;
+
+  return (
+    <>
+      <ImageProfile
+        src={setImageSrc}
+        onClick={navigateToProfile}
+        height="h-8"
+        width="w-8"
+      />
+    </>
+  );
+};
+
+const HeaderRole = () => {
+  return (
+    <>
+      <header className="px-5 py-6 flex items-center justify-between bg-white 851px:px-56">
+        <TitleComponent />
+        <ProfileImageComponent />
+      </header>
+    </>
+  );
+};
+
+export default HeaderRole;

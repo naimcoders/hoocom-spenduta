@@ -17,7 +17,7 @@ const LeftToRightSection = (
       <img
         src={ srcImage }
         alt={ altImage }
-        className='rounded-2xl 600px:h-56 m-auto w-full object-cover shadow-md'
+        className='rounded-2xl 600px:h-56 m-auto w-full object-cover shadow-sm'
       />
     </section>
   )

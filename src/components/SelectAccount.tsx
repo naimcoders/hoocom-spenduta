@@ -1,51 +1,74 @@
-import { useLoginStore } from '@/store/loginStore'
-import { useState } from 'react'
+import { ReactNode, useEffect } from "react";
+import selectAccountHighlight from "@/utils/select-account-highlight";
+import useUserStore from "@/store/userStore";
 
-const SelectAccount = () => {
-  const [adminWrapper, setAdminWrapper] = useState<boolean>(false)
-  const [wkWrapper, setWkWrapper] = useState<boolean>(false)
-  const [gmWrapper, setGmWrapper] = useState<boolean>(false)
-  const setAccountType = useLoginStore(state => state.setAccountType)
+type NodeProps = {
+  children?: ReactNode;
+};
 
-  const handleAdminWrapper = () => {
-    setAdminWrapper(!adminWrapper)
-    setWkWrapper(false)
-    setGmWrapper(false)
-    setAccountType(!adminWrapper ? 'admin' : '')
-  }
-  
-  const handleWkWrapper = () => {
-    setWkWrapper(!wkWrapper)
-    setAdminWrapper(false)
-    setGmWrapper(false)
-    setAccountType(!wkWrapper ? 'wali-kelas' : '')
-  }
-  
-  const handleGmWrapper = () => {
-    setGmWrapper(!gmWrapper)
-    setAdminWrapper(false)
-    setWkWrapper(false)
-    setAccountType(!gmWrapper ? 'guru-mapel' : '')
-  }
+const SelectAccount = ({ children }: NodeProps) => {
+  const { employeeId, setAccountType } = useUserStore();
+
+  const {
+    adminWrapper,
+    wkWrapper,
+    gmWrapper,
+    handleAdminWrapper,
+    handleGmWrapper,
+    handleWkWrapper,
+    setAdminWrapper,
+    setWkWrapper,
+    setGmWrapper,
+  } = selectAccountHighlight();
+
+  useEffect(() => {
+    if (employeeId.role === "ADMIN") {
+      setAdminWrapper(true);
+      setAccountType("admin");
+    } else if (employeeId.role === "WALI_KELAS") {
+      setWkWrapper(true);
+      setAccountType("wali-kelas");
+    } else if (employeeId.role === "GURU_MAPEL") {
+      setGmWrapper(true);
+      setAccountType("guru-mapel");
+    }
+  }, [employeeId.role]);
 
   return (
-    <div className='flex flex-col gap-4'>
-      <label htmlFor="chooseAnAccount" className='capitalize'>pilih jenis akun</label>
-      <div className='grid 600px:grid-cols-3 gap-3'>
-        <div className={
-          `${adminWrapper ? 'bg-secondary text-primary' : null} bg-primary px-4 py-3 rounded-md shadow-sm text-center capitalize text-gray-highlight cursor-pointer select-account`
-        } onClick={handleAdminWrapper}>admin</div>
+    <section className="flex flex-col gap-4 my-4">
+      <h3 className="capitalize">pilih jenis akun</h3>
+      <section className="flex flex-col gap-4">
+        <section
+          className={`${
+            adminWrapper ? "bg-secondary text-primary" : null
+          } bg-primary px-4 py-3 rounded-md shadow-sm text-center capitalize text-dark cursor-pointer select-account text-[14px]`}
+          onClick={handleAdminWrapper}
+        >
+          admin
+        </section>
 
-        <div className={
-          `${wkWrapper ? 'bg-secondary text-primary' : null} bg-primary px-4 py-3 rounded-md shadow-sm text-center capitalize text-gray-highlight cursor-pointer select-account`
-        } onClick={handleWkWrapper}>wali kelas</div>
-        
-        <div className={
-          `${gmWrapper ? 'bg-secondary text-primary' : null} bg-primary px-4 py-3 rounded-md shadow-sm text-center capitalize text-gray-highlight cursor-pointer select-account`
-        } onClick={handleGmWrapper}>guru mapel</div>
-      </div>
-    </div>
-  )
-}
+        <section
+          className={`${
+            wkWrapper ? "bg-secondary text-primary" : null
+          } bg-primary px-4 py-3 rounded-md shadow-sm text-center capitalize text-dark cursor-pointer select-account text-[14px]`}
+          onClick={handleWkWrapper}
+        >
+          wali kelas
+        </section>
 
-export default SelectAccount
+        {!wkWrapper ? null : children}
+
+        <section
+          className={`${
+            gmWrapper ? "bg-secondary text-primary" : null
+          } bg-primary px-4 py-3 rounded-md shadow-sm text-center capitalize text-dark cursor-pointer select-account text-[14px]`}
+          onClick={handleGmWrapper}
+        >
+          guru mapel
+        </section>
+      </section>
+    </section>
+  );
+};
+
+export default SelectAccount;

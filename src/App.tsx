@@ -1,7 +1,7 @@
-import RoutesConfig from "./configs/router"
+import RoutesConfig from "./configs/router";
 
 const App = () => {
-  return <RoutesConfig />
-}
+  return <RoutesConfig />;
+};
 
-export default App
+export default App;

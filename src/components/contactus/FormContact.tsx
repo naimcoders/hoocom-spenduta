@@ -1,51 +1,54 @@
-import { FormValuesContactUs } from "@/utils/form-props"
 import SecondaryButton from "../buttons/SecondaryButton"
-import Textarea from "../textfields/Textarea"
-import { useForm } from "react-hook-form"
-import { onSubmitContact } from "@/onsubmit/on-submit-contact"
 import TextfieldMultipleType from "../textfields/TextfieldMultipleType"
+import Textarea from "../textfields/Textarea"
+import { FormValues } from "@/utils/form-props"
+import { useForm } from "react-hook-form"
+import { formContactProps } from "@/utils/contact-props"
 
 const FormContact = () => {
-	const {
-		register,
-		handleSubmit
-	} = useForm<FormValuesContactUs>()
+  const {
+    control,
+    handleSubmit
+  } = useForm<FormValues>({ mode: "onChange" })
 
-	const { onSubmit } = onSubmitContact()
-	
+  const onSubmit = handleSubmit(e => {
+    console.log(e)
+  })
+
   return (
-		<form className="bg-white p-5 rounded-2xl shadow-sm flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
-			<div className="flex flex-col gap-2">
-				<label htmlFor="fullname" className="capitalize">nama lengkap</label>
-				<TextfieldMultipleType
-					registerProps={register}
-					htmlForPropEnglish="fullname"
-					inIndonesia="nama lengkap"
-					placeholderProp="Masukkan nama lengkap"
-					type="text"
-				/>
-			</div>
-			<div className="flex flex-col gap-2">
-				<label htmlFor="email" className="capitalize">email</label>
-				<TextfieldMultipleType
-					registerProps={register}
-					htmlForPropEnglish="email"
-					inIndonesia="email"
-					placeholderProp="Masukkan email"
-					type="email"
-				/>
-			</div>
-			<div className="flex flex-col gap-2">
-				<label htmlFor="message" className="capitalize">pesan</label>
-				<Textarea
-					registerProp={register}
-					htmlForPropEnglish="message"
-					htmlForPropIndo="pesan"
-				/>
-			</div>
-			<SecondaryButton label="kirim" />
-		</form>
-	)
+    <form
+      className="bg-white p-5 rounded-2xl shadow-sm flex flex-col gap-6"
+      onSubmit={onSubmit}
+    >
+      {formContactProps.map((prop) => (
+        <section className="flex flex-col gap-2" key={prop.name}>
+          <label htmlFor={prop.name}>{prop.title}</label>
+          <TextfieldMultipleType
+            name={prop.name}
+            control={control}
+            rules={{ required: true }}
+            defaultValue=""
+            type={prop.type}
+            id={prop.name}
+            placeholder={prop.placeholder}
+          />
+        </section>
+      ))}
+
+      <section className="flex flex-col gap-2">
+        <label htmlFor="message">Pesan</label>
+        <Textarea
+          id="message"
+          name="message"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+        />
+      </section>
+
+      <SecondaryButton label="kirim pesan" />
+    </form>
+  )
 }
 
 export default FormContact

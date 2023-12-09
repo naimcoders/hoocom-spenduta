@@ -1,22 +1,46 @@
-import { Fragment, FC, ReactNode } from 'react'
-import { Transition, Dialog } from '@headlessui/react'
+import { Fragment, ReactNode } from "react";
+import { Transition, Dialog } from "@headlessui/react";
+import useUserStore from "@/store/userStore";
+import { useGeneralStore } from "@/store/generalStore";
+import { TFuncVoid } from "@/types/commonTypes";
+import { reloadPage } from "@/utils/default-type";
 
-type ModalComponentProps = {
-  title: string
-  isOpenModal: boolean
-  isCloseModal: () => void
-}
+type TransitionProps = {
+  title: string;
+  isOpenModal: boolean;
+  textColor: string;
+  labelBtnTransparent: string;
+  children: ReactNode;
+  isCloseModal: TFuncVoid;
+  reload?: boolean;
+};
 
-type ChildrenProps = ModalComponentProps & {
-  children: ReactNode
-}
-
-const TransitionModal: FC<ChildrenProps> = ({
+const TransitionModal = ({
   children,
   title,
   isOpenModal,
-  isCloseModal
-}) => {
+  isCloseModal,
+  textColor,
+  labelBtnTransparent,
+  reload,
+}: TransitionProps) => {
+  const { resetEmployeeId, setSelectedClass, setAccountType } = useUserStore();
+  const { setDataId } = useGeneralStore();
+
+  const closeModal = () => {
+    isCloseModal();
+    resetEmployeeId({
+      id: "",
+      role: "",
+    });
+
+    setSelectedClass();
+    setAccountType("");
+    setDataId("");
+
+    if (reload) setTimeout(reloadPage, 500);
+  };
+
   return (
     <Transition appear show={isOpenModal} as={Fragment}>
       <Dialog as="section" className="relative z-10" onClose={isCloseModal}>
@@ -46,20 +70,20 @@ const TransitionModal: FC<ChildrenProps> = ({
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h2"
-                  className="text-18px font-lexendMedium leading-6 text-secondary capitalize"
+                  className={`${textColor} font-lexendMedium leading-6 capitalize mb-5 text-center`}
                 >
-                  { title }
+                  {title}
                 </Dialog.Title>
 
-                { children }
+                {children}
 
                 <div className="flex justify-center">
                   <button
                     type="button"
-                    className="none-highlight inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={isCloseModal}
+                    className="none-highlight inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-lexendMedium text-red-500 hover:bg-red-200 focus:outline-none capitalize outline-none"
+                    onClick={closeModal}
                   >
-                    Batal
+                    {labelBtnTransparent}
                   </button>
                 </div>
               </Dialog.Panel>
@@ -68,7 +92,7 @@ const TransitionModal: FC<ChildrenProps> = ({
         </div>
       </Dialog>
     </Transition>
-  )
-}
+  );
+};
 
-export default TransitionModal
+export default TransitionModal;

@@ -3,18 +3,21 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'lexendRegular';
-  src: url('fonts/Lexend-Regular.ttf');
+  font-family: "lexendRegular";
+  src: url("/src/assets/fonts/Lexend-Regular.ttf");
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'lexendMedium';
-  src: url('fonts/Lexend-Medium.ttf');
+  font-family: "lexendMedium";
+  src: url("/src/assets/fonts/Lexend-Medium.ttf");
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'lexendSemiBold';
-  src: url('fonts/Lexend-SemiBold.ttf');
+  font-family: "lexendSemiBold";
+  src: url("/src/assets/fonts/Lexend-SemiBold.ttf");
+  font-display: swap;
 }
 
 .slick-arrow.slick-prev {
@@ -29,7 +32,6 @@
 
 .select-account,
 .general-data-edit,
-.header-role-profile,
 .hide-password,
 .none-highlight {
   -webkit-tap-highlight-color: transparent;
@@ -37,4 +39,8 @@
 
 .card-scroll-horizontal::-webkit-scrollbar {
   display: none;
+}
+
+.img-rendering {
+  image-rendering: crisp-edges;
 }

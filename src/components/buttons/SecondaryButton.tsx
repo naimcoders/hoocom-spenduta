@@ -1,13 +1,17 @@
-import { ButtonLabelProps } from "@/utils/button-props"
+type TProps = {
+  label: string;
+  onClick?: () => void;
+};
 
-const SecondaryButton = ({ label }: ButtonLabelProps) => {
+const SecondaryButton = ({ label, onClick }: TProps) => {
   return (
     <button
-      className='capitalize bg-secondary text-primary p-2 rounded-lg mt-4 hover:bg-blue-600'
+      className="capitalize bg-secondary text-primary p-2 rounded-lg my-2 hover:bg-blue-600"
+      onClick={onClick}
     >
-      { label }
+      {label}
     </button>
-  )
-}
+  );
+};
 
-export default SecondaryButton
+export default SecondaryButton;

@@ -1,97 +1,122 @@
-import { useModalStore } from "@/store/modalStore"
-import { FormValuesGeneralData } from '@/utils/form-props'
-import { useForm } from 'react-hook-form'
-import { onSubmitGeneralData } from "@/onsubmit/on-submit-generaldata"
-import ReactDOM from 'react-dom'
-
-import SecondaryButton from '../buttons/SecondaryButton'
-import TextfieldMultipleType from '../textfields/TextfieldMultipleType'
-import TextfieldPassword from '../textfields/TextfieldPassword'
-import TransitionModal from '../templates/transitionModal'
-
+import { useModalStore } from "@/store/modalStore";
+import { useForm } from "react-hook-form";
+import { FormValues } from "@/utils/form-props";
+import { useGetGeneralData } from "@/hooks/use-admin";
+import { createPortal } from "react-dom";
+import { modalId } from "@/utils/modal-id";
+import SecondaryButton from "../buttons/SecondaryButton";
+import TextfieldMultipleType from "../textfields/TextfieldMultipleType";
+import TransitionModal from "../templates/TransitionModal";
+import SubmitGeneralData from "@/onsubmit/admin/submitGeneralData";
+import Loading from "../Loading";
 
 const GeneralDataModal = () => {
-  const { register, handleSubmit } = useForm<FormValuesGeneralData>()
-  const { isGeneralData, setIsGeneralData } = useModalStore()
-  const { onSubmit } = onSubmitGeneralData()
-  const generalDataId = document.querySelector('#generalDataModal')
+  const { handleSubmit, control } = useForm<FormValues>({ mode: "onChange" });
+  const { isGeneralData, setIsGeneralData } = useModalStore();
 
-  const closeModal = () => setIsGeneralData(!isGeneralData)
-  
+  const closeModal = () => setIsGeneralData(!isGeneralData);
+  const { data } = useGetGeneralData();
+  const { onSubmit, isLoading } = SubmitGeneralData();
+
+  if (isLoading) return <Loading />;
+  const getData = data?.data!;
+
   return (
     <>
-      {!generalDataId ? null : (
-          ReactDOM.createPortal(
+      {!modalId
+        ? null
+        : createPortal(
             <TransitionModal
               title="edit data umum"
               isOpenModal={isGeneralData}
               isCloseModal={closeModal}
+              textColor="text-secondary"
+              labelBtnTransparent="batal"
             >
               <form
                 className="flex flex-col gap-4 my-4"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <div className='grid grid-cols-auto-fit gap-2'>
+                <div className="grid grid-cols-auto-fit gap-2">
                   <section className="flex flex-col gap-2">
-                    <label htmlFor="period" className="capitalize text-15px">periode</label>
+                    <label htmlFor="period" className="capitalize text-15px">
+                      periode
+                    </label>
                     <TextfieldMultipleType
+                      name="period"
+                      control={control}
+                      rules={{ required: true }}
+                      defaultValue={getData.period}
                       type="text"
-                      htmlForPropEnglish="period"
-                      placeholderProp="periode"
-                      inIndonesia='periode'
-                      registerProps={register}
+                      id="period"
+                      placeholder="masukkan periode"
                     />
                   </section>
                   <section className="flex flex-col gap-2">
-                    <label htmlFor="period" className="capitalize text-15px">semester</label>
+                    <label htmlFor="semester" className="capitalize text-15px">
+                      semester
+                    </label>
                     <TextfieldMultipleType
-                      type="number"
-                      htmlForPropEnglish="semester"
-                      placeholderProp="semester"
-                      inIndonesia='semester'
-                      registerProps={register}
+                      name="semester"
+                      control={control}
+                      rules={{ required: true }}
+                      defaultValue={getData.semester}
+                      type="text"
+                      id="semester"
+                      placeholder="masukkan semester"
                     />
                   </section>
                   <section className="flex flex-col gap-2">
-                    <label htmlFor="period" className="capitalize text-15px">KKM</label>
+                    <label htmlFor="kkm" className="capitalize text-15px">
+                      KKM
+                    </label>
                     <TextfieldMultipleType
-                      type="number"
-                      htmlForPropEnglish="kkm"
-                      placeholderProp="KKM"
-                      inIndonesia='KKM'
-                      registerProps={register}
+                      name="kkm"
+                      control={control}
+                      rules={{ required: true }}
+                      defaultValue={getData.kkm}
+                      type="text"
+                      id="kkm"
+                      placeholder="masukkan KKM"
                     />
                   </section>
                   <section className="flex flex-col gap-2">
-                    <label htmlFor="period" className="capitalize text-15px">email sekolah</label>
+                    <label htmlFor="email" className="capitalize text-15px">
+                      email sekolah
+                    </label>
                     <TextfieldMultipleType
+                      name="emailSchool"
+                      control={control}
+                      rules={{ required: true }}
+                      defaultValue={getData.emailSchool}
                       type="email"
-                      htmlForPropEnglish="email"
-                      placeholderProp="email sekolah"
-                      inIndonesia='email sekolah'
-                      registerProps={register}
+                      id="email"
+                      placeholder="masukkan email sekolah"
                     />
                   </section>
                   <section className="flex flex-col gap-2">
-                    <label htmlFor="period" className="capitalize text-15px">kata sandi</label>
-                    <TextfieldPassword
-                      htmlForPropEnglish='password'
-                      htmlForPropIndonesia='kata sandi'
-                      placeholderProp='masukkan kata sandi'
-                      registerProp={register}
+                    <label htmlFor="password" className="capitalize text-15px">
+                      kata sandi
+                    </label>
+                    <TextfieldMultipleType
+                      name="passwordEmail"
+                      control={control}
+                      rules={{ required: true }}
+                      defaultValue={getData.passwordEmail}
+                      type="password"
+                      id="password"
+                      placeholder="masukkan sandi email"
                     />
                   </section>
                 </div>
 
-                <SecondaryButton label='simpan data' />
+                <SecondaryButton label="simpan data" />
               </form>
             </TransitionModal>,
-            generalDataId
-          )
-        )
-      }
+            modalId
+          )}
     </>
-  )
-}
+  );
+};
 
-export default GeneralDataModal
+export default GeneralDataModal;

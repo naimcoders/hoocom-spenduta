@@ -22,3 +22,27 @@ export const contactDatas: ContactProps[] = [
     srcImg: phoneIcon
   }
 ]
+
+// form
+type newProp = "fullname" | "email" | "message"
+type FormProps = {
+  title: string
+  name: newProp
+  type: string
+  placeholder: string
+}
+
+export const formContactProps: FormProps[] = [
+  {
+    title: "Nama Lengkap",
+    name: "fullname",
+    placeholder: "Masukkan nama lengkap",
+    type: "text",
+  },
+  {
+    title: "Email",
+    name: "email",
+    placeholder: "Masukkan email",
+    type: "email",
+  }
+]
