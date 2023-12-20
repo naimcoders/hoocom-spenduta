@@ -1,6 +1,10 @@
+import { MoonLoader } from "react-spinners"
+
 const Loading = () => {
   return (
-    <h1>Loading...</h1>
+    <section className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-10">
+      <MoonLoader color="#57adf4" />
+    </section>
   )
 }
 

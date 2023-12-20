@@ -1,0 +1,1 @@
+export const URI_BACKEND = import.meta.env.VITE_URI_BACKEND

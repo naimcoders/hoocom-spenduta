@@ -1,9 +1,19 @@
-const LandingPage = () => {
+import Banner from "@/components/Banner"
+import Clients from "@/components/Clients"
+import News from "@/components/News"
+import FooterHome from "@/components/footers/FooterHome"
+import HeaderHome from "@/components/headers/HeaderHome"
+
+const Home = () => {
   return (
-    <main className='Landing-page'>
-      <h1>Landing page</h1>
+    <main>
+      <HeaderHome pageName="home" />
+      <Banner />
+      <Clients />
+      <News />
+      <FooterHome />
     </main>
   )
 }
 
-export default LandingPage
+export default Home

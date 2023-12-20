@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "lexendRegular";
+  src: url("/src/assets/fonts/Lexend-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "lexendMedium";
+  src: url("/src/assets/fonts/Lexend-Medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "lexendSemiBold";
+  src: url("/src/assets/fonts/Lexend-SemiBold.ttf");
+  font-display: swap;
+}
+
+.slick-arrow.slick-prev {
+  left: 5%;
+  z-index: 1;
+}
+
+.slick-arrow.slick-next {
+  right: 5%;
+  z-index: 1;
+}
+
+.select-account,
+.general-data-edit,
+.hide-password,
+.none-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-scroll-horizontal::-webkit-scrollbar {
+  display: none;
+}
+
+.img-rendering {
+  image-rendering: crisp-edges;
+}
