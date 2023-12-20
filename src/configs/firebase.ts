@@ -1,4 +1,4 @@
-import { getApp, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAuth, signInWithCustomToken, signOut } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 

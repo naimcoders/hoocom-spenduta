@@ -1,7 +1,7 @@
 import { useActiveModal } from "@/custom-hook/useActiveModal";
 import GeneralInfoModal from "./GeneralInfoModal";
 import { useGeneralStore } from "@/store/generalStore";
-import { TBaseTeacher, TBaseUser } from "@/types/commonTypes";
+import { TBaseUser } from "@/types/commonTypes";
 import { useGetUserById } from "@/hooks/use-admin";
 
 const useHookLocal = () => {
