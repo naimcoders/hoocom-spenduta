@@ -4,7 +4,6 @@ import {
   TBaseBobotById,
   TCreateAssessment,
   TGetAttendances,
-  TSingleId,
   TValueAssessment,
   TValueAttendancesAndAssessments,
 } from "@/types/componentTypes";
@@ -23,7 +22,7 @@ export const bobotByClassAndLessonFromPost = (
   });
 
 export const postAssessment = (url: string, data: TCreateAssessment) =>
-  requestHandler<TSingleId, TCreateAssessment>({ url, method: "POST", data });
+  requestHandler<null, TCreateAssessment>({ url, method: "POST", data });
 
 export const getStudentPerformance = (url: string) =>
   requestHandler<TValueAttendancesAndAssessments>({

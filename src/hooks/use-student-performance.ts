@@ -70,7 +70,6 @@ export const useGetAttendancesFromPost = () => {
 
 export const useGetAssessmentsFromPost = () => {
   const URI = `${uriStudentPerformance}/assessments`;
-
   return useMutation({
     mutationKey: ["assessments"],
     mutationFn: (data: TAttendanceAndAssessmentBody) =>

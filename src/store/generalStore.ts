@@ -23,9 +23,14 @@ export type TPresences = {
   description?: string;
 };
 
+type TTwoDatas = { first: string; second: string };
+
 type GeneralStoreProps = {
   dataId: string;
   setDataId: (value: string) => void;
+  twoDatas: TTwoDatas;
+  setTwoDatas: (value: TTwoDatas) => void;
+  clearTwoDatas: () => void;
 
   singleParent?: TDataParentById | undefined;
   setSingleParent: (value: TDataParentById | undefined) => void;
@@ -54,6 +59,12 @@ type GeneralStoreProps = {
 export const useGeneralStore = create<GeneralStoreProps>((set) => ({
   dataId: "",
   setDataId: (value) => set(() => ({ dataId: value })),
+  twoDatas: {
+    first: "",
+    second: "",
+  },
+  setTwoDatas: (value) => set({ twoDatas: value }),
+  clearTwoDatas: () => set({ twoDatas: { first: "", second: "" } }),
 
   setSingleParent: (value) => set(() => ({ singleParent: value })),
 

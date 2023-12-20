@@ -9,11 +9,27 @@ import {
   ref,
   deleteObject,
 } from "firebase/storage";
-import { useGetPhotoProfile, usePatchPhotoProfile } from "@/hooks/use-profile";
+import { usePatchPhotoProfile } from "@/hooks/use-profile";
 import { useAuth } from "@/store/userStore";
 import { useForm } from "react-hook-form";
 import { FormValues } from "@/utils/form-props";
 import { useActiveModal } from "./useActiveModal";
+import { toast } from "react-toastify";
+import { reloadPage } from "@/utils/default-type";
+
+enum Elimit {
+  maxImageSize = 2,
+  devideImageSize = 1024,
+}
+
+const megaBytesValidate = (size: number): boolean => {
+  const { devideImageSize, maxImageSize } = Elimit;
+  const imageSize: number = size;
+  const fileSizeInKB = imageSize / devideImageSize;
+  const fileSizeInMB = fileSizeInKB / devideImageSize;
+  const toFixed = fileSizeInMB.toFixed(2);
+  return Number(toFixed) > maxImageSize;
+};
 
 const downloadURL = async (ref: StorageReference) => {
   try {
@@ -36,8 +52,7 @@ export const useProfileHook = () => {
   const user = useAuth((v) => v.user);
   const userId = user?.id ?? "";
 
-  const getProfile = useGetPhotoProfile(userId);
-  const urlImage = getProfile.data?.data?.urlImage;
+  const urlImage = user?.urlImage;
   const setImageSrc = !urlImage ? profileDefault : urlImage;
 
   const onClickEditPhoto = () => {
@@ -48,16 +63,24 @@ export const useProfileHook = () => {
 
   const editPhoto = usePatchPhotoProfile(userId);
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const now = new Date();
+    const time = now.getTime();
     const files = e.target.files;
+    const size = e.target.files?.[0]?.size ?? 0;
 
     if (files?.length! < 1) {
       return;
     }
 
-    const file = e.target.files?.[0]!;
-    const fileName: string = file.name;
-    const path = setPath(fileName);
+    if (megaBytesValidate(size)) {
+      toast.error("Ukuran foto maksimal 2MB");
+      setTimeout(reloadPage, 2000);
+      return;
+    }
 
+    const file = e.target.files?.[0]!;
+    const fileName: string = `${file.name}-${time}`;
+    const path = setPath(fileName);
     const storageRef = ref(storage, path);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -69,7 +92,7 @@ export const useProfileHook = () => {
         );
         setPercent(percent);
       },
-      (err) => console.log(err),
+      (err) => console.error(err),
       async () => {
         const url = await downloadURL(uploadTask.snapshot.ref);
         const toMutate = {
@@ -86,7 +109,6 @@ export const useProfileHook = () => {
       const fileTarget = setPath(user?.imageName ?? "");
       const desertRef = ref(storage, fileTarget);
       await deleteObject(desertRef);
-
       await editPhoto.mutateAsync({ imageName: null, urlImage: null });
     } catch (err) {
       console.error(err);
@@ -103,7 +125,6 @@ export const useProfileHook = () => {
     percent,
     setImageSrc,
     onClickDeletePhoto,
-    getProfile,
   };
 };
 

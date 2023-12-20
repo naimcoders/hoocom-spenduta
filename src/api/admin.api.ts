@@ -2,6 +2,8 @@ import { uriEmployees, uriGeneralData, uriLessons } from "@/api/admin-api";
 import { TPresences } from "@/store/generalStore";
 import { TBaseUser, requestHandler } from "@/types/commonTypes";
 import {
+  TBobot,
+  TBodyContactMessage,
   TGeneralData,
   TGetTeacherByLesson,
   TPatchEmployee,
@@ -13,6 +15,11 @@ import {
   TUserIdAndRole,
   TValuePrecences,
 } from "@/types/componentTypes";
+
+export const postMessageToDeveloperEmail = (
+  url: string,
+  data: TBodyContactMessage
+) => requestHandler<null, TBodyContactMessage>({ url, method: "POST", data });
 
 export const getClassnames = (url: string) =>
   requestHandler<TSingleClassName[]>({ url, method: "GET" });
@@ -86,3 +93,6 @@ export const postPresences = (url: string, data: TPresences[]) =>
     method: "POST",
     data,
   });
+
+export const patchBobot = (url: string, data: TBobot) =>
+  requestHandler<null, TBobot>({ url, method: "PATCH", data });

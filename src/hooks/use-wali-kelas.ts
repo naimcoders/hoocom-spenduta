@@ -18,14 +18,13 @@ import {
 } from "@/api/wali-kelas-api";
 import { ERole, TBaseResponse } from "@/types/commonTypes";
 import {
-  TBaseUserIdAndClassname,
+  TBodyGradeIncrement,
   TPostParentAndStudent,
   TPostStudent,
   TSingleId,
   TSinglePhone,
 } from "@/types/componentTypes";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { reloadPage } from "@/utils/default-type";
 import { useQueryClientHook } from "@/custom-hook/useQueryClient";
 import { useActiveModal } from "@/custom-hook/useActiveModal";
 import { useGeneralStore } from "@/store/generalStore";
@@ -39,16 +38,17 @@ export const useGetStudentByClass = (classname: string) => {
   });
 };
 
-export const usePatchStudentClass = (id: string) => {
+export const usePatchStudentClass = (id: string, classname?: string) => {
+  const { refetchAfterMutation } = useQueryClientHook();
   const onError = ({ message }: TBaseResponse<null>) => toast.error(message);
   const onSuccess = ({ message }: TBaseResponse<null>) => {
     toast.success(message);
-    setTimeout(reloadPage, 1200);
+    refetchAfterMutation(["student", classname]);
   };
 
   return useMutation({
     mutationKey: ["patch-student-class", id],
-    mutationFn: (data: TBaseUserIdAndClassname) =>
+    mutationFn: (data: TBodyGradeIncrement) =>
       patchStudentClass(uriGradeIncrement, data),
     onError,
     onSuccess,

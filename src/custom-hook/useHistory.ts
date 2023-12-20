@@ -22,7 +22,6 @@ const filtered = (title: TLabelPresence, attendances?: TGetAttendances[]) => {
 export const HistoryHook = () => {
   const { classname, lesson } = useParams() as TClassAndLessonParam;
   const getAttendances = useGetAttendancesFromPost();
-
   const { setAttendances, attendances, setAssessmentValues } =
     useGeneralStore();
 
@@ -45,7 +44,6 @@ export const HistoryHook = () => {
   ];
 
   const getAssessments = useGetAssessmentsFromPost();
-
   const handleAssessment = async (semester: TSemesterLocal) => {
     try {
       const datas = await getAssessments.mutateAsync({

@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { getApp, initializeApp } from "firebase/app";
 import { getAuth, signInWithCustomToken, signOut } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
@@ -13,7 +13,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-
 const auth = getAuth();
 
 export { auth, signInWithCustomToken, signOut, storage };

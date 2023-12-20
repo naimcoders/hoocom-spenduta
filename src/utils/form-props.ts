@@ -3,37 +3,26 @@ export type FormValues = {
   fullname: string;
   password: string;
   confirmPassword: string;
-
   period: string;
   semester: string;
   kkm: number;
   emailSchool: string;
   passwordEmail: string;
-
   classname: string;
   lesson: string;
-
   nip: string;
   phone: string;
   email: string;
-
   message: string;
-
   parentFullname: string;
   studentFullname: string;
   parentPhone: string;
   studentPhone: string;
   nis: string;
-
-  tugas_title: string;
-  ulangan_title: string;
-  uts_title: string;
-  uas_title: string;
-  tugas_score: number;
-  ulangan_score: number;
-  uts_score: number;
-  uas_score: number;
-
+  tugas: number;
+  ulangan: number;
+  uas: number;
+  uts: number;
   description: string;
   score: number;
 };

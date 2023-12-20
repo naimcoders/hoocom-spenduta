@@ -27,8 +27,11 @@ const MainCardGI = () => {
               </h2>
               <h3 className="font-lexendMedium">{student.fullname}</h3>
             </section>
+            <span className="text-12px text-[#4D4D4D] text-center">
+              {student.period}
+            </span>
 
-            <CardActions id={student.id} />
+            <CardActions id={student.id} parentId={student.student.parentId} />
           </section>
         ))}
       </section>

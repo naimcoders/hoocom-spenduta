@@ -10,12 +10,6 @@ import { uriProfile } from "./user-api";
 const uriValidate = `${uriProfile}/validate-password`;
 const uriChangePassword = `${uriProfile}/change-password`;
 
-export const getPhotoProfile = (url: string) =>
-  requestHandler<TBodyProfile>({
-    url,
-    method: "GET",
-  });
-
 export const editPhotoProfile = (url: string, data: TBodyProfile) =>
   requestHandler<null, TBodyProfile>({
     url,

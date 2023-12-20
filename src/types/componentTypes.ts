@@ -16,6 +16,12 @@ export type TSinglePhone = {
   phone: string;
 };
 
+export type TBodyContactMessage = {
+  fullname: string;
+  email: string;
+  message: string;
+};
+
 export type TUseClassList = {
   id: number;
   classname?: string;
@@ -220,7 +226,11 @@ export type TPostStudent = {
   classname?: string;
 };
 
-export type TBaseUserIdAndClassname = TSingleUserId & TSingleClassname;
+export type TBodyGradeIncrement = TSingleUserId &
+  TSingleClassname & {
+    period: string;
+    parentId: string;
+  };
 
 type TPageName = "presensi" | "penilaian";
 export const setUriHistory = (

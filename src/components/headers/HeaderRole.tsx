@@ -2,7 +2,6 @@ import { useProfileHook } from "@/custom-hook/useProfile";
 import { timeGreeting } from "@/utils/time-greeting";
 import { useAuth } from "@/store/userStore";
 import ImageProfile from "../ImageProfile";
-import Loading from "../Loading";
 
 const TitleComponent = () => {
   const greeting = timeGreeting();
@@ -21,8 +20,7 @@ const TitleComponent = () => {
 };
 
 const ProfileImageComponent = () => {
-  const { navigateToProfile, setImageSrc, getProfile } = useProfileHook();
-  if (getProfile.isLoading) return <Loading />;
+  const { navigateToProfile, setImageSrc } = useProfileHook();
 
   return (
     <>

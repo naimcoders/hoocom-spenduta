@@ -21,7 +21,6 @@ const filterByType = (
 
 const ChildCardComponent = ({ title, datas }: TChildCardComponent) => {
   const filtered = filterByType(title, datas);
-
   return (
     <>
       <section className="px-5 py-3 851px:px-56 flex flex-col gap-3">
@@ -69,11 +68,10 @@ const ChildCardComponent = ({ title, datas }: TChildCardComponent) => {
 };
 
 const CardComponent = () => {
-  const { assessmentValues } = useGeneralStore();
-
+  const assessmentValues = useGeneralStore((b) => b.assessmentValues);
   return (
     <>
-      {!assessmentValues ? null : assessmentValues.length < 1 ? (
+      {!assessmentValues ? (
         <div className="600px:mx-56">
           <EmptyDatas label="penilaian" />
         </div>

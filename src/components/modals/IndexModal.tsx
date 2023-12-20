@@ -1,29 +1,28 @@
 import { useActiveModal } from "@/custom-hook/useActiveModal";
 import GeneralInfoModal from "./GeneralInfoModal";
 import { useGeneralStore } from "@/store/generalStore";
-import { TBaseTeacher } from "@/types/commonTypes";
+import { TBaseTeacher, TBaseUser } from "@/types/commonTypes";
 import { useGetUserById } from "@/hooks/use-admin";
 
 const useHookLocal = () => {
   const teacherId = useGeneralStore((v) => v.dataId);
   const { data, isLoading } = useGetUserById(teacherId);
 
-  const setRole = (user?: TBaseTeacher) => {
+  const setRole = (user?: TBaseUser) => {
     return user?.role === "ADMIN"
-      ? `Admin - ${user.admin.status}`
+      ? `Admin - ${user.admin?.status}`
       : user?.role === "GURU_MAPEL"
       ? "Guru Mapel"
-      : `Wali Kelas - ${user?.teacher.className}`;
+      : `Wali Kelas - ${user?.teacher?.className}`;
   };
 
-  const setNIP = (user?: TBaseTeacher) => {
-    return user?.role === "ADMIN" ? user.admin.nip : user?.teacher.nip;
+  const setNIP = (user?: TBaseUser) => {
+    return user?.role === "ADMIN" ? user.admin?.nip : user?.teacher?.nip;
   };
 
   const user = data?.data;
   const nip = setNIP(user);
   const role = setRole(user);
-
   return { user, isLoading, nip, role };
 };
 

@@ -44,7 +44,10 @@ const ScoringForm = ({ bobotId }: TProps) => {
       <section className="grid grid-cols-auto-fit gap-4">
         {arrScoringField.map(({ label }) => (
           <section key={label} className="flex flex-col gap-2">
-            <label className={`${transformedLabel(label)} text-15px`}>
+            <label
+              className={`${transformedLabel(label)} text-15px`}
+              htmlFor={label}
+            >
               {label}
             </label>
             <TextfieldMultipleType

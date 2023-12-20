@@ -6,14 +6,10 @@ import { useGetStudentByClass } from "@/hooks/use-wali-kelas";
 import { SubmitAssessment } from "@/onsubmit/guru-mapel/assessment";
 import { useGeneralStore } from "@/store/generalStore";
 import { TBaseParentAndStudent } from "@/types/commonTypes";
-import { TLabelAssessment } from "@/types/componentTypes";
+import { TLabelAssessment, TSingleClassname } from "@/types/componentTypes";
 import { FormValues } from "@/utils/form-props";
 import { memo } from "react";
 import { Control } from "react-hook-form";
-
-type TProps = {
-  classname: string;
-};
 
 type TOption = {
   data: TBaseParentAndStudent[];
@@ -33,10 +29,6 @@ type TFieldProps = {
   placeholder: string;
   type: string;
 };
-
-// const transformLabel = (label: TLabelAssessment): string => {
-//   return label === "uas" ? "UAS" : label === "uts" ? "UTS" : label;
-// };
 
 const setObjectField = (label: TLabelAssessment): TFieldProps[] => {
   return [
@@ -102,7 +94,6 @@ const isTheSameType = (
 const Cards = () => {
   const { onSubmitTugas, control, handleAssessment } = SubmitAssessment();
   const { typeAssessment } = useGeneralStore();
-
   const arrButtons: TButton[] = [
     { label: "Tugas" },
     { label: "Ulangan" },
@@ -125,25 +116,25 @@ const Cards = () => {
           {isTheSameType(typeAssessment, "Tugas", btn.label) ? (
             <ScoringForm
               control={control}
-              label="Tugas"
+              label={btn.label}
               onSubmit={onSubmitTugas}
             />
           ) : isTheSameType(typeAssessment, "Ulangan", btn.label) ? (
             <ScoringForm
               control={control}
-              label="Ulangan"
+              label={btn.label}
               onSubmit={onSubmitTugas}
             />
           ) : isTheSameType(typeAssessment, "UTS", btn.label) ? (
             <ScoringForm
               control={control}
-              label="UTS"
+              label={btn.label}
               onSubmit={onSubmitTugas}
             />
           ) : isTheSameType(typeAssessment, "UAS", btn.label) ? (
             <ScoringForm
               control={control}
-              label="UAS"
+              label={btn.label}
               onSubmit={onSubmitTugas}
             />
           ) : null}
@@ -153,18 +144,15 @@ const Cards = () => {
   );
 };
 
-const ScoringStudent = ({ classname }: TProps) => {
-  const { data, isFetching } = useGetStudentByClass(classname);
-
-  if (isFetching || !data?.data) return <Loading />;
+const ScoringStudent = ({ classname }: TSingleClassname) => {
+  const { data, isLoading } = useGetStudentByClass(classname);
+  if (isLoading || !data?.data) return <Loading />;
 
   return (
-    <>
-      <main className="851px:px-56 px-5 flex flex-col gap-6 mb-6">
-        <OptionComponent data={data.data} />
-        <Cards />
-      </main>
-    </>
+    <main className="851px:px-56 px-5 flex flex-col gap-6 mb-6">
+      <OptionComponent data={data.data} />
+      <Cards />
+    </main>
   );
 };
 

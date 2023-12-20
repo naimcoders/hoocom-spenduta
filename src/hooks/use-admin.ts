@@ -21,12 +21,14 @@ import {
   postClassname,
   postEmployeeAPI,
   postLesson,
+  postMessageToDeveloperEmail,
   postPresences,
   postTeacherLesson,
 } from "@/api/admin.api";
 import useUserStore from "@/store/userStore";
 import { TBaseResponse } from "@/types/commonTypes";
 import {
+  TBodyContactMessage,
   TPatchEmployee,
   TPostTeacherLesson,
   TSingleClassName,
@@ -40,10 +42,28 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { uriRegisterEmployee } from "@/api/auth-api";
 import { useQueryClientHook } from "@/custom-hook/useQueryClient";
 import { useActiveModal } from "@/custom-hook/useActiveModal";
-import { uriGetUserById } from "@/api/user-api";
+import { uriDeveloperContact, uriGetUserById } from "@/api/user-api";
 import { getTeacherLessonById, getUserById } from "@/api/user.api";
 import { uriPresences, uriTeacherLessonByClass } from "@/api/guru-mapel";
 import { TPresences } from "@/store/generalStore";
+import { reloadPage } from "@/utils/default-type";
+
+export const usePostMessageToDeveloperEmail = () => {
+  const URI = `${uriDeveloperContact}/send-message`;
+  const onError = ({ message }: TBaseResponse<null>) => toast.error(message);
+  const onSuccess = ({ message }: TBaseResponse<null>) => {
+    toast.success(message);
+    setTimeout(reloadPage, 2000);
+  };
+
+  return useMutation({
+    mutationKey: ["send-email-to-developer"],
+    mutationFn: (data: TBodyContactMessage) =>
+      postMessageToDeveloperEmail(URI, data),
+    onError,
+    onSuccess,
+  });
+};
 
 export const useGetUserById = (id: string) => {
   const URI = `${uriGetUserById}/${id}`;

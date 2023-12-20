@@ -5,7 +5,6 @@ import { TFuncVoid } from "@/types/commonTypes";
 import CheckPasswordModal from "./modals/CheckPasswordModal";
 import ChangePasswordModal from "./modals/ChangePasswordModal";
 import { SubmitProfile } from "@/onsubmit/profile.submit";
-import Loading from "./Loading";
 
 const HeaderComponent = () => {
   return (
@@ -97,10 +96,8 @@ const ImageComponent = () => {
     onClickEditPhoto,
     percent,
     setImageSrc,
-    getProfile,
     onClickDeletePhoto,
   } = useProfileHook();
-  if (getProfile.isLoading) return <Loading />;
 
   return (
     <section className="bg-white 851px:mx-56 rounded-lg p-5 flex flex-col items-center gap-5">

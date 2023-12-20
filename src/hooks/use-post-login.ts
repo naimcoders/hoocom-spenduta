@@ -21,7 +21,7 @@ type TSuccess = {
 
 const usePostLogin = () => {
   const navigate = useNavigate();
-  const { setAccountType, setIsAuth, isAuth } = useUserStore();
+  const { setAccountType } = useUserStore();
 
   const mutationFn = async (newData: BodyProps) => {
     const response = await axios.post(uriLoginEmployee, newData);
@@ -35,13 +35,12 @@ const usePostLogin = () => {
   const onSuccess = async (success: TSuccess) => {
     try {
       await signInWithCustomToken(auth, success.token);
-      setIsAuth(!isAuth);
       const path = success.pathTo;
 
       setAccountType("");
       navigate(path);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.error(err);
     }
   };
 

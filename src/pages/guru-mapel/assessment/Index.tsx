@@ -15,7 +15,6 @@ const AssessmentPage = () => {
   const navigate = useNavigate();
   const { classname, lesson } = useParams() as TParams;
   const headerTitle = `Penilaian - ${classname} ${lesson}`;
-
   const uri = setUriHistory("penilaian", classname, lesson);
   const handleHIstory = () => navigate(uri);
 

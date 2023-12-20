@@ -1,26 +1,31 @@
-import useUserStore, { useAuth } from "@/store/userStore";
+import { useAuth } from "@/store/userStore";
 import { useEffect, useState } from "react";
 import { auth } from "@/configs/firebase";
 import { Outlet, Navigate } from "react-router-dom";
 import Loading from "./Loading";
+import { useGetUserById } from "@/hooks/use-admin";
 
 const PrivateRoute = () => {
-  const { setIsAuth, isAuth } = useUserStore();
+  const [isAuth, setIsAuth] = useState(false);
   const [error, setError] = useState<Error>();
   const [isLoading, setLoading] = useState(true);
+  const [id, setId] = useState("");
 
-  const user = useAuth((v) => v.user);
+  const { data } = useGetUserById(id);
+  const getUser = data?.data;
   const setUser = useAuth((v) => v.setUser);
 
   useEffect(() => {
-    if (!user) setUser();
-  }, [user]);
-
-  useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(
-      (user) => {
-        if (user) setIsAuth(true);
-        else setIsAuth(false);
+      async (user) => {
+        if (!user) setIsAuth(false);
+        else {
+          setIsAuth(true);
+          const result = await user?.getIdTokenResult();
+          const userId = String(result?.claims?.user_id);
+          setId(userId);
+          setUser(getUser);
+        }
         setLoading(false);
       },
       (err) => {
@@ -30,12 +35,9 @@ const PrivateRoute = () => {
     );
 
     return () => unsubscribe();
-  }, []);
+  }, [id, getUser]);
 
-  if (error) {
-    return <p>{error.message}</p>;
-  }
-
+  if (error) return <p>{error.message}</p>;
   if (isLoading) return <Loading />;
 
   return <>{!isAuth ? <Navigate to="/masuk" /> : <Outlet />}</>;

@@ -1,10 +1,10 @@
 import {
   TBaseParentAndStudent,
-  TBaseTeacher,
+  TBaseUser,
   requestHandler,
 } from "@/types/commonTypes";
 import {
-  TBaseUserIdAndClassname,
+  TBodyGradeIncrement,
   TDeleteStudentParent,
   TGetTeacherLesson,
   TPostParentAndStudent,
@@ -15,13 +15,13 @@ import {
 import { uriDeleteStudentAndParent } from "./wali-kelas-api";
 
 export const getUserById = (url: string) =>
-  requestHandler<TBaseTeacher>({ url, method: "GET" });
+  requestHandler<TBaseUser>({ url, method: "GET" });
 
 export const getStudentByClass = (url: string) =>
   requestHandler<TBaseParentAndStudent[]>({ url, method: "GET" });
 
-export const patchStudentClass = (url: string, data: TBaseUserIdAndClassname) =>
-  requestHandler<null, TBaseUserIdAndClassname>({ url, method: "PATCH", data });
+export const patchStudentClass = (url: string, data: TBodyGradeIncrement) =>
+  requestHandler<null, TBodyGradeIncrement>({ url, method: "PATCH", data });
 
 export const getParentById = (url: string) =>
   requestHandler<TBaseParentAndStudent>({ url, method: "GET" });
