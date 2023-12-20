@@ -1,0 +1,1 @@
+import{j as t}from"./index-03957ff0.js";const n=({label:o,onClick:e})=>t.jsxDEV("button",{className:"capitalize bg-secondary text-primary p-2 rounded-lg my-2 hover:bg-blue-600",onClick:e,children:o},void 0,!1,{fileName:"C:/my code/hoocom_project/frontend/src/components/buttons/SecondaryButton.tsx",lineNumber:8,columnNumber:5},globalThis);export{n as S};
